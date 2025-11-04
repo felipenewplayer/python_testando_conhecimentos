@@ -1,17 +1,13 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
-alunos = {'Nome':['Ricador','Felipe','Thay','Roberto'],
-          'Nota':[4,6,10,7],
-          'Aprovado':['Não','Não','Sim','Sim']}
+dados = pd.read_csv("C:/Users/felip/OneDrive/Área de Trabalho/Felipe/TI/Programação/PHYTON/Python2025/OpensXl/athlete_events.csv")
 
-data_frame= pd.DataFrame(alunos)
-print(data_frame.head())
-print(f"\ntamanho de colunas e linhas {data_frame.shape}")
-print(f"\n{data_frame.describe()}")
-print(f"\nTabela filtrada pelo nome\n\n{data_frame['Nome']}")
+dados.rename(columns={'Name':'Nome', 'Sex':'Sexo','Age':'Idade'}, inplace=True)
 
+dados.drop('ID', axis=1, inplace=True,)
+dados.drop('Event', axis=1, inplace=True)
 
-print(f"\nFiltragem por indice\n\n {data_frame.loc[0:10]}")
-
-alunos_aprovado = data_frame.loc[data_frame['Aprovado']=='Sim']
-print(f"\Tabela de alunos aprovado\n{alunos_aprovado}")
+dados.hist(column='Idade', bins=10)
+print(dados[0:5])
+plt.show()

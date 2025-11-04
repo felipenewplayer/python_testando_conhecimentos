@@ -1,3 +1,4 @@
+import random
 # print("Hello, Wolrd!")
 # nome = input("Digite seu nome: ") #String
 # idade = int(input("Digite sua idade: ")) # Int
@@ -55,6 +56,5 @@ if 1 <= a  <=10 :
     x = b ** 2 - 4 * (c / 2) 
     print(x)
     
-
 
 

@@ -1,4 +1,4 @@
-
+import random
 listaDeNumeros = [10,2,1,3,5,6,8,20,44,66,7,88,4342]
 
 tamanhoDaLista = len(listaDeNumeros)
@@ -45,6 +45,12 @@ def excluir_fruta(lista_de_frutas):
      print(f"{fruta_excluir} não está na lista.")
    
 excluir_fruta(lista_de_frutas)
+
+
+
+cidades = ["São Paulo", "Rio De Janeiro", "Rio Grande do Sul", "Acre"]
+escolhido = random.choice(cidades)
+print(escolhido)
 
 
         

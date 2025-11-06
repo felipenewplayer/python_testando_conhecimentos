@@ -24,3 +24,5 @@ plt.title('Relação entre altura e idade')
 plt.ylabel('ALtura')
 plt.xlabel('Idade')
 plt.show()
+
+

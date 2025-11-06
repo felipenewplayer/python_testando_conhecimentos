@@ -1,10 +1,12 @@
 import numpy as np
 
-arr = np.array([10,20,40,50]) # isso é um array (1D)
-matriz = np.array([[1,2,3],[4,5,6]]) # isso é uma matriz(2D)
+# 1D  Vetor
 
-print(arr)
-print(matriz)
+vetor = np.array([1,2,3])
+print(f'Vetor 1D {vetor}')
 
-soma_matriz = matriz.sum(axis=0)
-print(soma_matriz)
+
+# 2D Matriz
+matriz = np.array([[1,2,3], [4,5,6]])
+print(f'Matriz {matriz}')
+print(f'Shape da matriz {matriz.shape}')

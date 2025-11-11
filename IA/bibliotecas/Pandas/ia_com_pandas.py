@@ -1,4 +1,8 @@
+import numpy as np
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import plotly.express as px
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
 # Lendo os dados
@@ -13,6 +17,14 @@ filtro = dados.drop(columns=['Sport', 'Event']).copy()
 filtro[['Age', 'Height', 'Weight']] = filtro[['Age', 'Height', 'Weight']].fillna(
     filtro[['Age', 'Height', 'Weight']].mean()
 )
+
+print(np.unique(filtro['Year']))
+# sns.countplot(x= filtro['Year'])
+# plt.show()
+# plt.hist(x = filtro['Year'])
+# plt.show()
+grafico = px.treemap(filtro, path=['City','Year'])
+grafico.show()
 
 
 # Arredondando as colunas numéricas
@@ -51,9 +63,6 @@ scaler_peso = x_sclaler[:,1].min()
 scaler_ano = x_sclaler[:,2].min()
 print(scaler_altura,scaler_peso,scaler_ano)
 
-
-
-
 # medalhas_por_pais = dados.loc[dados['Medal'].notna()].groupby('Team')['Medal'].count().sort_values(ascending=False)
 # print(medalhas_por_pais.head(5))
 
@@ -79,6 +88,7 @@ print(scaler_altura,scaler_peso,scaler_ano)
 #     color='Team'
 # )
 # grafico.show()
+
 
 
 

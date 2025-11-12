@@ -1,26 +1,25 @@
-import numpy as np
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-from sklearn.linear_model  import LinearRegression
 
-altura = np.array([130,150,160,170,170,170]).reshape(-1,1) # matriz
-idade = np.array([15,17,19,21,23,25])
+# x = np.array(df['Idade']).reshape(-1,1)
+# y = np.array(df['Peso']).reshape(-1,1)
 
-dados = ({
-    'Altura':altura,
-    'Idade':idade
-})
+# scaler_x = StandardScaler()
+# scaler_y = StandardScaler()
+# x_scaler = scaler_x.fit_transform(x)
+# y_scaler = scaler_y.fit_transform(y)
 
-df = pd.DataFrame(dados)
-print(df)
+# print(y_scaler)
+# print(x_scaler)
 
-modelo = LinearRegression()
-modelo.fit(altura,idade)
-predicao = modelo.predict([[180]])
-print(f'Idade previta {predicao}')
+# modelo = LinearRegression()
+# modelo.fit(x_scaler,y_scaler)
 
-sns.barplot(x='Altura', y='Idade',data=df, color='purple')
-plt.title("Relação entre Altura e Idade")
-plt.show()
+# dado_inputado = int(input("Digite uma idade : "))
+# idade_nova = np.array([[dado_inputado]])
+# idade_nova_scaler = scaler_x.transform(idade_nova)
 
+# previsao_scaler = modelo.predict(idade_nova_scaler)
+# previsao_real = scaler_y.inverse_transform(previsao_scaler)
+
+
+# print(f"Previsão padronizada: {previsao_scaler}")
+# print(f"Previsão real (peso estimado): {previsao_real[0][0]:.2f} kg")

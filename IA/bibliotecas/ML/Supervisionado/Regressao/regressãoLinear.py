@@ -12,7 +12,6 @@ df = pd.DataFrame({
     'Idade':idade
 })
 
-
 print(df)
 
 modelo = LinearRegression()

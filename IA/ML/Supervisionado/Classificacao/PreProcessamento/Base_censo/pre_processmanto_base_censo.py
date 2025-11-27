@@ -52,6 +52,6 @@ print(X_census_train.shape, y_census_train.shape)
 print(X_census_test.shape, y_census_test.shape)
 
 
-with open('census_pre_processado.pkl', 'wb') as f:
+with open(r'C:\Users\felip\OneDrive\Área de Trabalho\Felipe\TI\Programação\PHYTON\Python2025\IA\ML\Supervisionado\Classificacao\PreProcessamento\Base_censo\base_censo.pkl', 'wb') as f:
     pickle.dump([X_census_train, X_census_test, y_census_train, y_census_test], f)
     

@@ -50,4 +50,12 @@ y_credit = np.concatenate((y_credit_train, y_credit_test), axis=0)
 
 ######## KNN ########
 
+parametros = { 'n_neighbors':[3,5,10,20],
+              'p':[1,2],}
 
+grid_search = GridSearchCV(estimator=KNeighborsClassifier(),param_grid=parametros)
+grid_search.fit(X_credit, y_credit)
+melhores_parametros = grid_search.best_params_
+melhor_resultado = grid_search.best_score_
+print(melhores_parametros)
+print(melhor_resultado)

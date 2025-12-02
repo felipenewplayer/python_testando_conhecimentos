@@ -76,11 +76,25 @@ y_credit = np.concatenate((y_credit_train, y_credit_test), axis=0)
 
 ######## SVM ########
 
-parametros = { 'tol':[0.0001,0.00001,0.000001],
-              'C':[1.0,1.5, 2.0],
-              'kernel':['rbf','linear','poly', 'sigmoid'],}
+# parametros = { 'tol':[0.0001,0.00001,0.000001],
+#               'C':[1.0,1.5, 2.0],
+#               'kernel':['rbf','linear','poly', 'sigmoid'],}
 
-grid_search = GridSearchCV(estimator=SVC(),param_grid=parametros)
+# grid_search = GridSearchCV(estimator=SVC(),param_grid=parametros)
+# grid_search.fit(X_credit, y_credit)
+# melhores_parametros = grid_search.best_params_
+# melhor_resultado = grid_search.best_score_
+# print(melhores_parametros)
+# print(melhor_resultado)
+
+
+######## Redes Neuraia ########
+
+parametros = {'activation':['logistic','tanh','relu','logistic'],
+              'solver':['adam','sgd'],
+              'batch_size':[10,56],}
+
+grid_search = GridSearchCV(estimator=MLPClassifier(), param_grid=parametros)
 grid_search.fit(X_credit, y_credit)
 melhores_parametros = grid_search.best_params_
 melhor_resultado = grid_search.best_score_

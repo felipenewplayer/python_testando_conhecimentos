@@ -62,11 +62,25 @@ y_credit = np.concatenate((y_credit_train, y_credit_test), axis=0)
 
 ######## Logistic Regression ########
 
+# parametros = { 'tol':[0.0001,0.00001,0.000001],
+#               'C':[1.0,1.5, 2.0],
+#               'solver':['lbfgs','saga','sag'],}
+
+# grid_search = GridSearchCV(estimator=LogisticRegression(),param_grid=parametros)
+# grid_search.fit(X_credit, y_credit)
+# melhores_parametros = grid_search.best_params_
+# melhor_resultado = grid_search.best_score_
+# print(melhores_parametros)
+# print(melhor_resultado)
+
+
+######## SVM ########
+
 parametros = { 'tol':[0.0001,0.00001,0.000001],
               'C':[1.0,1.5, 2.0],
-              'solver':['lbfgs','saga','sag'],}
+              'kernel':['rbf','linear','poly', 'sigmoid'],}
 
-grid_search = GridSearchCV(estimator=LogisticRegression(),param_grid=parametros)
+grid_search = GridSearchCV(estimator=SVC(),param_grid=parametros)
 grid_search.fit(X_credit, y_credit)
 melhores_parametros = grid_search.best_params_
 melhor_resultado = grid_search.best_score_

@@ -12,3 +12,11 @@ rede_neural = pickle.load(open(r'C:\Users\felip\OneDrive\Área de Trabalho\Felip
 svm = pickle.load(open(r'C:\Users\felip\OneDrive\Área de Trabalho\Felipe\TI\Programação\PHYTON\Python2025\IA\ML\Supervisionado\Classificacao\Classificadores\Classificadores_Salvos\svm_finalizado.sav', 'rb'))
 arvore_decisao = pickle.load(open(r'C:\Users\felip\OneDrive\Área de Trabalho\Felipe\TI\Programação\PHYTON\Python2025\IA\ML\Supervisionado\Classificacao\Classificadores\Classificadores_Salvos\arvore_decisao_finalizado.sav', 'rb'))
 
+novo_registro = X_credit[0].reshape(1, -1)
+print(novo_registro.shape)
+previsao_rede_neural = rede_neural.predict(novo_registro)
+previsao_svm = svm.predict(novo_registro)
+previsao_arvore_decisao = arvore_decisao.predict(novo_registro)
+print(f'Rede Neural: {previsao_rede_neural[0]}')
+print(f'SVM: {previsao_svm[0]}')
+print(f'Árvore de Decisão: {previsao_arvore_decisao[0]}')

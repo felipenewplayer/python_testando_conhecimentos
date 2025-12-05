@@ -107,58 +107,61 @@ y_credit = np.concatenate((y_credit_train, y_credit_test), axis=0)
 
 ######## CrossValidation ########
 
-from sklearn.model_selection import cross_val_score, KFold
+# from sklearn.model_selection import cross_val_score, KFold
 
-resultados_arvores = []
-resultados_random_forest = []
-resultados_knn = []
-resultados_logist = []
-resultados_svc = []
-resultados_rede_neural = []
+# resultados_arvores = []
+# resultados_random_forest = []
+# resultados_knn = []
+# resultados_logist = []
+# resultados_svc = []
+# resultados_rede_neural = []
 
-for i in range(30):
-    print(f"Rodada {i}")
+# for i in range(30):
+#     print(f"Rodada {i}")
 
-    kfold = KFold(n_splits=10, shuffle=True, random_state=i)
+#     kfold = KFold(n_splits=10, shuffle=True, random_state=i)
 
-    # Árvore
-    arvore = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=1, 
-                                    min_samples_split=5, splitter='best')
-    score = cross_val_score(arvore, X_credit, y_credit, cv=kfold).mean()
-    resultados_arvores.append(score)
-    print(f"Árvore = {score}")
+#     # Árvore
+#     arvore = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=1, 
+#                                     min_samples_split=5, splitter='best')
+#     score = cross_val_score(arvore, X_credit, y_credit, cv=kfold).mean()
+#     resultados_arvores.append(score)
+#     print(f"Árvore = {score}")
 
-    # Random Forest
-    random_florest = RandomForestClassifier(criterion='entropy', 
-                                            min_samples_leaf=1, 
-                                            min_samples_split=5, 
-                                            n_estimators=10)
-    score = cross_val_score(random_florest, X_credit, y_credit, cv=kfold).mean()
-    resultados_random_forest.append(score)
-    print(f"Random Forest = {score}")
+#     # Random Forest
+#     random_florest = RandomForestClassifier(criterion='entropy', 
+#                                             min_samples_leaf=1, 
+#                                             min_samples_split=5, 
+#                                             n_estimators=10)
+#     score = cross_val_score(random_florest, X_credit, y_credit, cv=kfold).mean()
+#     resultados_random_forest.append(score)
+#     print(f"Random Forest = {score}")
 
-    # KNN
-    knn = KNeighborsClassifier()
-    score = cross_val_score(knn, X_credit, y_credit, cv=kfold).mean()
-    resultados_knn.append(score)
-    print(f"KNN = {score}")
+#     # KNN
+#     knn = KNeighborsClassifier()
+#     score = cross_val_score(knn, X_credit, y_credit, cv=kfold).mean()
+#     resultados_knn.append(score)
+#     print(f"KNN = {score}")
 
-    # Regressão Logística
-    logistica = LogisticRegression(C=1.0, solver='lbfgs', tol=0.001, max_iter=500)
-    score = cross_val_score(logistica, X_credit, y_credit, cv=kfold).mean()
-    resultados_logist.append(score)
-    print(f"Logística = {score}")
+#     # Regressão Logística
+#     logistica = LogisticRegression(C=1.0, solver='lbfgs', tol=0.001, max_iter=500)
+#     score = cross_val_score(logistica, X_credit, y_credit, cv=kfold).mean()
+#     resultados_logist.append(score)
+#     print(f"Logística = {score}")
 
-    # SVM
-    svm = SVC(kernel='rbf', C=2.0)
-    score = cross_val_score(svm, X_credit, y_credit, cv=kfold).mean()
-    resultados_svc.append(score)
-    print(f"SVM = {score}")
+#     # SVM
+#     svm = SVC(kernel='rbf', C=2.0)
+#     score = cross_val_score(svm, X_credit, y_credit, cv=kfold).mean()
+#     resultados_svc.append(score)
+#     print(f"SVM = {score}")
 
     # Rede Neural
-    rede_neural = MLPClassifier(activation='relu', batch_size=56, 
-                                solver='adam', max_iter=500)
-    score = cross_val_score(rede_neural, X_credit, y_credit, cv=kfold).mean()
-    resultados_rede_neural.append(score)
-    print(f"Rede Neural = {score}")
- 
+    # rede_neural = MLPClassifier(activation='relu', batch_size=56, 
+    #                             solver='adam', max_iter=500)
+    # score = cross_val_score(rede_neural, X_credit, y_credit, cv=kfold).mean()
+    # resultados_rede_neural.append(score)
+    # print(f"Rede Neural = {score}")   
+    
+print(X_credit.shape)
+print(y_credit.shape)
+    

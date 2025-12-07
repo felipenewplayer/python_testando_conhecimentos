@@ -1,2 +1,2 @@
 
-print(x_variable[:, 0].min())
+print(df)

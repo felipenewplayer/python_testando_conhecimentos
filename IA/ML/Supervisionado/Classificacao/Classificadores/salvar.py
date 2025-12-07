@@ -22,7 +22,7 @@ previsao = classificador_rede_neural.predict(X_credit_test)
 classificador_arvore = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=1, min_samples_split=5, splitter='best')
 classificador_arvore.fit(X_credit_train, y_credit_train)
 
-classificador_svm = SVC(C=2.0, kernel='rbf')
+classificador_svm = SVC(C=2.0, kernel='rbf', probability=True)
 classificador_svm.fit(X_credit_train, y_credit_train)
 
 pickle.dump(classificador_rede_neural, open(r'C:\Users\felip\OneDrive\Área de Trabalho\Felipe\TI\Programação\PHYTON\Python2025\IA\ML\Supervisionado\Classificacao\Classificadores\Classificadores_Salvos/rede_neural_finalizado.sav', 'wb'))

@@ -1,6 +1,7 @@
 import bs4 as bs
 import urllib.request
 import spacy
+from spacy import displacy
 from spacy.matcher import PhraseMatcher
 from IPython.display import display, HTML
 
@@ -37,3 +38,9 @@ print(doc[130:131], doc[130-5:130+5])  # Exibe o token encontrado e o contexto
 
 numeros_palavras = 50
 display(HTML(f"<h3>Contexto da palavra '{string}':</h3>"))
+
+for entidade in doc.ents:
+    print(entidade.text, entidade.label_)
+    
+    
+displacy.render(doc, style = "ent", jupyter=True)

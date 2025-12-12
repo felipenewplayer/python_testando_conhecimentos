@@ -1,47 +1,86 @@
-## ETAPA 1 importar as bibliotecas
-
 import pandas as pd
 import spacy
+from spacy.lang.pt.stop_words import STOP_WORDS
+from spacy.util import minibatch
+from spacy.training import Example
 import string
 import random
-import seaborn as sns
-import numpy as np
-from spacy.lang.pt.stop_words import STOP_WORDS
-# ETAPA 2 carregar os dados
 
-base_de_dados = pd.read_csv(r'C:\Users\felip\OneDrive\Área de Trabalho\Felipe\TI\Programação\PHYTON\Python2025\IA\PNL\Classificacao_de_sentimentos_com_spacy\base_treinamento.txt', encoding='utf-8')
+base_de_dados = pd.read_csv(r"C:\Users\felip\OneDrive\Área de Trabalho\Felipe\TI\Programação\PHYTON\Python2025\IA\PNL\Classificacao_de_sentimentos_com_spacy\base_treinamento.txt")
 
-# print(base_de_dados.shape)
-# print(base_de_dados.head())
-# print(base_de_dados.tail())
+print(base_de_dados.head())
 
-# sns.countplot(base_de_dados['emocao'], label = 'Contagem')
+# NLP LIMPO PARA TREINAR
+nlp = spacy.blank("pt")
+textcat = nlp.add_pipe("textcat")
+textcat.add_label("ALEGRIA")
+textcat.add_label("MEDO")
 
-### ETAPA 3 função para preprocessamento dos dados
+
+# NLP SEPARADO PARA PROCESSAR
+nlp_pre = spacy.blank("pt")
 
 pontuacoes = string.punctuation
 
-stop_words = STOP_WORDS
-# print(stop_words)
+def preprocess(texto):
+    texto = str(texto).lower()
+    doc = nlp_pre(texto)
+    tokens = [
+        t.text for t in doc
+        if t.text not in pontuacoes
+        and t.text not in STOP_WORDS
+    ]
+    return " ".join(tokens)
 
-pln = spacy.load('pt_core_news_sm')
-# print(pln)  
+
+base_de_dados['texto'] = base_de_dados["texto"].apply(preprocess)
 
 
-def preprocessamento(texto):
-    texto = texto.lower()
-    documento = pln(texto)
-    lista = []    
-    for token in documento:
-        # lista.append(token.text)
-        lista.append(token.lemma_)
+dados_treinamento = []
+
+for texto, emocao in zip(base_de_dados["texto"], base_de_dados["emocao"]):
+    if emocao == "alegria":
+        cats = {"ALEGRIA": True, "MEDO": False}
+    else:
+        cats = {"ALEGRIA":False, "MEDO":True}
+    
+    dados_treinamento.append((texto, {"cats":cats}))
+
+nlp.initialize()
+
+
+for epoca in range (20):
+    random.shuffle(dados_treinamento)
+    losses = {}
+    
+    for lote in minibatch(dados_treinamento, size = 20):
+        exemplos = []
         
-    lista =  [palavra for palavra in lista if palavra not in stop_words and palavra not in pontuacoes]
-    
-    lista = ' '.join([str(elemento) for elemento in lista if not elemento.isdigit   ()])
-    return lista
+        for texto, anotacao in lote:
+            doc = nlp.make_doc(texto)
+            exemplo = Example.from_dict(doc, anotacao)
+            exemplos.append(exemplo)
+            
+        nlp.update(exemplos, losses=losses)
+    print(f"Época {epoca+1}, Losses:{losses}")
 
-    
-teste = "Estou aprendendo pnl 10 90  com spacy!!!"
-print(preprocessamento(teste))
 
+nlp.to_disk("modeldo_de_sentimento_com_spacy")
+print("Modelo Salvo")
+
+
+modelo = spacy.load("modeldo_de_sentimento_com_spacy")
+
+
+textos_teste = [
+    "estou muito feliz hoje",
+    "isso está me assustando",
+    "que dia maravilhoso",
+    "estou com muito medo desse lugar"
+]
+
+for t in textos_teste:
+    doc = modelo(t)
+    print(f"\nTexto: {t}")
+    print(f"Emoção: {doc.cats}")
+    print("Predição:", max(doc.cats, key=doc.cats.get))

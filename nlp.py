@@ -1,15 +1,12 @@
-import spacy
-import re, string
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
 
-nlp = spacy.load("pt_core_news_sm")
-text = "Estou aprendendo processamento de linguagem natural com spacy!!!"
-def preprocess_text(text):
-    text = str(text).lower()
-    text = re.sub(r"http\S+|www\S+","", text)
-    text = re.sub(r"\s+"," ", text).strip()
-    text = text.translate(str.maketrans("", "", string.punctuation))
-    doc = nlp(text)
-    tokens = [t.lemma_ for t in doc if not t.is_stop and t.is_alpha and len(t) > 2]
-    return" ".join(tokens)
+df = pd.DataFrame({
+    "emocao":["alegria", "medo"]
+})
 
-print(preprocess_text(text))
+coder = OneHotEncoder(sparse_output=False)
+X = coder.fit_transform(df[["emocao"]])
+print(X)
+print(df.head())
+print(coder.get_feature_names_out())

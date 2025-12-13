@@ -11,49 +11,8 @@ import string
 
 
 nlp = spacy.load("pt_core_news_sm")
-
-dados = {
-    "texto": [
-        # ALEGRIA
-        "estou muito feliz hoje",
-        "que dia maravilhoso",
-        "recebi uma ótima notícia",
-        "estou sorrindo o dia inteiro",
-        "me sinto em paz comigo mesmo",
-        "essa conquista me deixou muito feliz",
-        "estou animado com o resultado",
-        "finalmente deu tudo certo",
-        "me sinto grato pela ajuda",
-        "esse momento é especial",
-        "tive um dia incrível",
-        "estou satisfeito com meu trabalho",
-        "que alegria estar aqui",
-        "isso me deixa muito contente",
-        "estou confiante e tranquilo",
-
-        # MEDO
-        "estou com muito medo",
-        "isso está me assustando",
-        "não me sinto seguro aqui",
-        "estou com receio do que pode acontecer",
-        "essa situação é perigosa",
-        "meu coração está acelerado de medo",
-        "tenho medo de errar",
-        "isso me dá arrepios",
-        "estou nervoso e apreensivo",
-        "algo ruim pode acontecer",
-        "não quero ficar sozinho aqui",
-        "essa notícia me deixou assustado",
-        "estou inseguro com essa decisão",
-        "tenho um mau pressentimento",
-        "isso é realmente assustador"
-    ],
-    "emocao": [
-        "alegria"] * 15 + ["medo"] * 15
-}
-
-
-df = pd.DataFrame(dados)
+base_de_dados = pd.read_csv(r"C:\Users\felip\OneDrive\Área de Trabalho\Felipe\TI\Programação\PHYTON\Python2025\IA\ML\PNL\dados.csv")
+df = pd.DataFrame(base_de_dados)
 print(df)
 
 def preprocess(texto):

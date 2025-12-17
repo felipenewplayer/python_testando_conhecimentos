@@ -22,9 +22,7 @@ def preprocess(texto):
         if token.text not in string.punctuation
         and token.is_alpha
     ]
-    
     return tokens
-
 
 sentencas = [preprocess(t) for t in base_de_dados["texto"]]
 print(sentencas)
